@@ -4,6 +4,7 @@ public:
         int low=0,high=nums.size()-1;
         int ans=INT_MAX;
         while(low<=high){
+            //identify sorted half, pickup minimum of that half,eliminate that half conduct BS on opp half.
             int mid=low + (high-low)/2;
             if(nums[low]<=nums[mid]){
                 ans=min(ans,nums[low]);
