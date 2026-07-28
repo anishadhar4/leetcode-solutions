@@ -5,7 +5,7 @@ public:
         while(low<=high){
             int mid = low + (high-low)/2;
             if(nums[mid]==target)return true;
-            if(nums[low]==nums[mid]&& nums[mid]==nums[high]){
+            if(nums[low]==nums[mid]&& nums[mid]==nums[high]){//only this edge case makes a diff from I 
                 low++;high--;
                 continue;
             }
