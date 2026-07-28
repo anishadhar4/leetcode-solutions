@@ -5,7 +5,12 @@ public:
         int ans=INT_MAX;
         while(low<=high){
             //identify sorted half, pickup minimum of that half,eliminate that half conduct BS on opp half.
+            //if search space is already sorted , nums[low] is ans
             int mid=low + (high-low)/2;
+            if(nums[low]<=nums[high]){
+                ans=min(ans,nums[low]);
+                break;
+            }
             if(nums[low]<=nums[mid]){
                 ans=min(ans,nums[low]);
                 low=mid+1;
