@@ -1,22 +1,24 @@
 class Solution {
 public:
-    bool search(vector<int>& nums, int target) {
-        int low=0,high=nums.size()-1;
+    bool search(vector<int>& arr, int target) {
+        int n=arr.size();
+        int low=0,high=n-1;
         while(low<=high){
-            int mid = low + (high-low)/2;
-            if(nums[mid]==target)return true;
-            if(nums[low]==nums[mid]&& nums[mid]==nums[high]){//only this edge case makes a diff from I 
+            
+            int mid = low+(high-low)/2;
+            if(arr[mid]==target)return true;
+            if(arr[low]==arr[mid] && arr[mid]==arr[high]){
                 low++;high--;
                 continue;
             }
-            if(nums[low]<=nums[mid]){
-                if(target>=nums[low]&& target<=nums[mid]){
+            if(arr[low]<=arr[mid]){
+                if(target>=arr[low] && target<=arr[mid]){
                     high=mid-1;
                 }else{
                     low=mid+1;
                 }
             }else{
-                if(target>=nums[mid] && target<=nums[high]){
+                if(target<=arr[high] && target>=arr[mid]){
                     low=mid+1;
                 }else{
                     high=mid-1;
@@ -24,7 +26,6 @@ public:
             }
         }
         return false;
-
         
     }
 };
