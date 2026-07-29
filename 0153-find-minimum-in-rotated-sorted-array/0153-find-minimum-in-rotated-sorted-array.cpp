@@ -1,26 +1,24 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int low=0,high=nums.size()-1;
+        
+        int n =nums.size();
+        int low=0,high=n-1;
         int ans=INT_MAX;
         while(low<=high){
-            //identify sorted half, pickup minimum of that half,eliminate that half conduct BS on opp half.
-            //if search space is already sorted , nums[low] is ans
             int mid=low + (high-low)/2;
             if(nums[low]<=nums[high]){
                 ans=min(ans,nums[low]);
                 break;
             }
             if(nums[low]<=nums[mid]){
-                ans=min(ans,nums[low]);
-                low=mid+1;
+                ans=min(nums[low],ans);
+                low=mid+1;//eliminate
             }else{
-                ans=min(ans,nums[mid]);
-                high=mid-1;
-                
+                ans=min(nums[mid],ans);
+                high=mid-1;//eliminate
             }
         }
         return ans;
-        
     }
 };
