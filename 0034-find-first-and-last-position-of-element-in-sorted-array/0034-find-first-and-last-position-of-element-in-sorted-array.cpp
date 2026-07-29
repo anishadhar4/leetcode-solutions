@@ -1,44 +1,41 @@
 class Solution {
 public:
-    //without ub and lb concept..stor first and last use three looops ..similar approach
-    int firstocc(vector<int>& nums,int target){
+    int lowerbound(vector<int>& nums, int target){
+        int ans=nums.size();
         int low=0,high=nums.size()-1;
-        int first =-1;
         while(low<=high){
-            int mid = low+(high-low)/2;
-            if(nums[mid]==target){
-                first=mid;
-                high=mid-1;
-            }else if(nums[mid]>target){
+            int mid=low+(high-low)/2;
+            if(nums[mid]>=target){
+                ans=mid;
                 high=mid-1;
             }else{
                 low=mid+1;
             }
         }
-        return first;
+        return ans;
     }
-    int lastocc(vector<int>&nums , int target){
+    int upperbound(vector<int>& nums, int target){
+        int ans=nums.size();
         int low=0,high=nums.size()-1;
-        int last =-1;
         while(low<=high){
-            int mid = low+(high-low)/2;
-            if(nums[mid]==target){
-                last=mid;
-                low=mid+1;
-            }else if(nums[mid]>target){
+            int mid=low+(high-low)/2;
+            if(nums[mid]>target){
+                ans=mid;
                 high=mid-1;
             }else{
                 low=mid+1;
             }
         }
-        return last;
+        return ans;
 
     }
     vector<int> searchRange(vector<int>& nums, int target) {
-        int first= firstocc(nums,target);
-        if(first==-1)return {-1,-1};
-        int last =lastocc(nums,target);
-        return{first,last};
+        int lb = lowerbound(nums,target);
+        int n =nums.size();
+        if(lb==n || nums[lb]!=target)return {-1,-1};
+        int ub = upperbound(nums,target);
+        return{lb,ub-1};
+
         
     }
 };
