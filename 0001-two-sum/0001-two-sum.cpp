@@ -1,23 +1,31 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int>m;
-        vector<int>ans;// hashing - big O of n
         int n=nums.size();
+        vector<pair<int,int>>v;
         for(int i=0;i<n;i++){
-            int first=nums[i];
-            int sec=target-first;
-            if(m.find(sec)!=m.end()){
-                ans.push_back(i);
-                ans.push_back(m[sec]);
-
-            }else{
-                m[first]=i;
-            }
-            
+            v.push_back({nums[i],i});
 
         }
-        return ans;
+        
+        sort(v.begin(),v.end());
+        
+        int st=0;
+        int end=n-1;
+        while(st<end){
+            int sum=v[st].first + v[end].first;//store element
+            if(sum>target){
+                end--;
+            }
+            else if(sum<target){
+                st++;
+            }
+            else{
+                return{v[st].second,v[end].second};//store index
+            }
+        }
+        return{};
+
         
     }
 };
